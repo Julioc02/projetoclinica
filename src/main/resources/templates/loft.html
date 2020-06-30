@@ -1,0 +1,132 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <meta charset="utf-8">
+  <title>AGENDADOS - OFTAMOLOGISTA</title>
+
+  <link rel="shortcut icon" type="image/x-png" href="favicon2.png">
+  <style>
+
+  #menu{
+    background-color: #1E90FF;
+    width: 1350px;
+    height: 90px;   
+  }
+
+  body{
+    background-image: url(img/download.jpg);
+    background-attachment: fixed;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-color: #000;
+  }
+
+
+    #imgMenu{
+    margin-top: -55px;
+    margin-left: 30px;
+    width: 200px;
+    height: 200px;
+  }
+  #itens{
+    word-spacing: 2.5em;
+    font-size: 24pt;
+    font-family: corbel;
+    text-decoration:
+  }
+  #itensX{
+    margin-top: -125px;
+    margin-left: 350px;
+  }
+
+  .null{
+    color: #A9A9A9;
+  }
+    #title{
+    background-color: #1E90FF;
+    font-size: 20pt;
+    font-family: corbel;
+    color: white;
+    text-align: center;
+    width: 500px;
+    border: 2px dotted white;
+    margin-left: 33%;
+    margin-top: 3.5%; 
+  }
+td {
+    border: 1px solid #1E90FF;
+    padding: 5px;
+}
+table {
+  border : 1px dashed #1E90FF;
+    font-family: corbel;
+    font-size: 20pt;
+    color: black;
+    text-align: center;
+    margin-left: 10.5%;
+    margin-top: 3.5%;
+    width: 1100px; 
+    background-color: white;
+
+}
+  #btnv{
+    background-color: red;
+    margin-left: 48%;
+    margin-top: 3%; 
+    color: white;
+    width: 100px;
+    height: 45px;
+    text-align: center;
+    font-size: 14pt;
+    border-radius: 10px; 
+  }
+  a{
+    text-decoration: none;
+    color: white;
+  }
+
+  </style>
+</head>
+
+<body>
+<div id="menu">
+      <img src="img/clin.png" id="imgMenu"> 
+      <div id="itensX">
+        <span id="itens"> 
+          <a href="/paginainicial" class="null">HOME</a> 
+          <a href="/cadastros" class="null">CADASTROS</a> 
+          <a href="/agendamentos">AGENDAMENTOS</a> 
+          <a href="/sobre" class="null">SOBRE</a>
+        </span>
+      </div>
+    </div> 
+
+  <div id="title">AGENDADOS PARA CONSULTA COM O OFTAMOLOGISTA</div> 
+<table>
+    <tr>
+        <td>#</td>
+        <td>NOME</td>
+        <td>DATA</td>
+        <td>HORÁRIO</td>
+        <td>VALOR</td>
+        <td>EDITAR</td>
+        <td>EXCLUIR</td>
+    </tr>
+   <tr th:each="c : ${Clientes}">
+          <td th:text="${c.id}"></td>
+		  <td th:text="${c.cliente}"></td>
+		  <td th:text="${c.data}"></td>
+		  <td th:text="${c.horario}"></td>
+		  <td th:text="${c.valor}"></td> 
+		  <td><a  th:href="@{/editarCliente/{id}(id=${c.id})}"><img  src="data:image/png;base64,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"  width="20px" height="20px"/></a></td>
+		  <td><a th:href="@{/delete/{id}(id=${c.id})}"><img  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAbFBMVEX///8zMzMfHx/AwMAwMDBISEgrKyslJSXi4uJeXl6goKAbGxvZ2dnMzMwiIiK0tLRzc3ORkZGDg4Pz8/MUFBRYWFjX19fp6enw8PA6OjrExMRSUlKXl5dBQUGjo6O5ubl+fn4RERFtbW2JiYmKkgfIAAAFH0lEQVR4nO2da5eqIBSGRySsKK1Ru2u3//8fT62Zc2lvG4VQ6Kz3+YwsHt3ABi0+PvpjnS1GMmpDjhbZusdW9MZsWhapahe8Kaq0KKcz3w02ZLcXSRe7P5aJ2O98N9qA2USY6H1Lism7PMf16ayM/e6o8+ktOuROJVZ+dxL1BqFap+YB+heZ1r4F2rjqF/zu6KtvhR/JL+JFwSgSl9y3xg9c0pcFoyi9+NZ4zvL1J3hHLH2LPONYOBGMouLoW6WZWaccrQtShTn3j+zm+SbUyLdME7WbTviFCHBazI0y7TZkEt6UcXiWq0n1E89uS3LwLUTZNHdCmRajxenzGafFqHiS5amNbyXCtekRSlFmbQ3dZGXjUisJLHvLq4ZWqlHc6eK4aRSWVVg9cdUwkKadE8y8KdsTq15bbMqSB2myMLh+0XB9WLnbngWpKo0qKFmgyn1PbbVizFaFMjLbkFhH7B7pcU+ttSFj/ch4PuPzaZr10lY7rjTGZGQ6EubsIaqQ5ouStc5kmPliwe6SWU/uFxZhwnyFd2QTTtJDS20508YV5jnXhq2fzz201BZmKCwqYc8wIMOc3n4ZWdTChpoinLyNBZjcWtSyZYbhLC/+f0MepW4Mh4nS9WoXt8FTmm37RZTdllaSZu0XrV59WzWfSC1aaVr7mMMrSdsv0nIyf0XwVDjbA+0LqYqTvaCT1xD9Y/+i4+ByB7RPhOXG3Dr4CP2NVHbjzdMd0PCw3F1lS6JwsVxoyTcylFaGr76RHxINQxgGDwxhGD4wfCD/zbvk3XfEn1Z3MLzo5AvfrTbiu826y0KK7a6/E53eJsAwaGAIw/CBIQzDB4YwDB8YwjB8OhlezvoRtlCUQndFiDRNfiJNhUFtbBc+ISXOXdaH4xmhJoqyoiWeM98ds+nyOdPsuJt3r45+iZzUtITV94w7sp0h/f3cg/40XLj5QWYcsGG3D8nbgOGAwNASGA4IDC2B4YDA0BIYDggMLYHhgPgzjDMC+/1nTktk7H30ipbgzfdnWOr0gfOUlhgX4qGEKNhqfHp+rETzDw79GU7I7lXCDen+luKGZLdETWAIQxjCEIYwhCEMYQhDGMIQhjCEIQxhCEMYwhCGMIQhDGEIQxjCEIYwhCEMYQhDGMIQhjCEIQxhCEMYwhCGMIQhDGEIQxjCEIYwhCEMYQhDGMIQhjCEIQxhCEMYwhCGMIQhDGEIQxjCEIYwhCEMYQhDGMIQhjCEIQw7GO61eKDxv6Afafov6McSeh+Q4TwmzGiJnJaI2f95z2iJeUCGQwFDS2A4IDC0BIYDAkNL2AmPWzZZD0S+pYZuTnhc6Ygorp3Ua86aCEaanYVixZgeterozplDoylKrI4dZawjcus6HUnbB/QgXxm5iaacnuDqKjhM4d2lcjQi0NWfu5qN4He6YQVpBz0Q+FZ1uXFUd3c2Jb3RUVI7qntGO/hNcXt0VHlXjlsmGAm2DLWFTkP3QBVqmcXzYYizq+InVt8mZleCH0sWpvf6VSqGIlXc7xakS2eG46Khfv/wrR57Ppseom+ST3eCt3SpKUr8It0mj4fwHmJycCn4kdPMzTsycpx1jGnG5BvtcJj54hiWou4h4ziEpKjddsJvPsNR1C4nin+oGzInH0jhKuNm7CTPfodHyR73GMZ77fsxSr13Poo+EFepT0eZVm42EH+irnRjpj+AntJVbz3wX/L5tSoSNaimVCopqut8uN2TWX1YTKrBBKvJ4lBbLuh/AchEvVYgXuT5AAAAAElFTkSuQmCC"  width="20px" height="20px"/></a></td>
+	     	
+</tr>    
+</table>
+
+  <a href="/agendamentos"><button id="btnv">VOLTAR</button></a>
+
+</body>
+
+</html>
