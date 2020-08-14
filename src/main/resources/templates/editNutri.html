@@ -8,7 +8,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	<meta charset="utf-8">
 	
 	<link href="bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
-	<title>Cadastro - Oftamologista</title>
+	<title>Edição - Nutricionista</title>
 	<link rel="shortcut icon" type="image/x-png" href="favicon2.png">
 	<style>
 	#menu{
@@ -18,7 +18,8 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	}
 
 	body{
-		background-image: url(img/download.jpg);
+		background-image: url(/img/download.jpg);
+	
 		background-attachment: fixed;
 		background-size: 100%;
 		background-repeat: no-repeat;
@@ -102,7 +103,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 
 <body>
 	<div id="menu">
-			<img src="img/clin.png" id="imgMenu">	
+			<img src="/img/clin.png" id="imgMenu">	
 			<div id="itensX">
 				<span id="itens"> 
 					<a href="/paginainicial"class="null">HOME</a> 
@@ -113,22 +114,24 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 			</div>
 		</div>
 
-	<div id="title">CADASTRO PARA CONSULTA DE OFTAMOLOGISTA</div>
+	<div id="title">CADASTRO PARA CONSULTA COM O NUTRICIONISTA</div>
 	<div class="alert alert-success" th:text="${mensagem}" 
 		 	 th:if="${not #strings.isEmpty(mensagem)}"></div>
 
 	<div id="cadastro">
-		<form action="/cad_ofta" method="POST">
-			<input type="text" placeholder="Seu nome:" name="cliente" id="cliente" class="label">
-			<input type="text" placeholder="Valor da consulta:" name="valor" id="valor" class="label" value="R$">
-			<span id="dh">Data e Horário para consulta:</span>
-			<input type="date" placeholder="Data da consulta:" name="data" id="data" class="label">
-			<input type="time" placeholder="Horário da consulta:" name="horario" id=horario"" class="label">
-			<button type="submit" id="btn">ENVIAR</button>
-			<a href="/cadastros"><button id="btnv">VOLTAR</button></a>
+		<form form th:object="${dados}" method="GET" action="/ECN">
+		<input type="text" class="label" th:field="*{id}" readonly="readonly">
+		<input type="text" class="label" th:field="*{cliente}">
+		<input type="text" class="label" th:field="*{valor}">
+		<span id="dh">Data e Horário para consulta:</span>
+		<input type="date" class="label" th:field="*{data}">
+		<input type="time" class="label" th:field="*{horario}">
 		
-		</form>
+		
+	   <button type="submit" id="btn">ENVIAR</button>
+	  <a href="/cadastros"><button id="btnv">VOLTAR</button></a>
 			
+		</form>
 	</div>
 
 

@@ -25,7 +25,20 @@ Clientes clientes;
 	 clientes.save(cliente);
 	 return "redirect:/aoft";
  }
+ 
+ @PostMapping("/cadp")
+ public String Salva(Cliente cliente) {
+	 clientes.save(cliente);
+	 return "redirect:/apsi";
+ }
 
+ @PostMapping("/cadn")
+ public String cadastrar(Cliente cliente) {
+	 clientes.save(cliente);
+	 return "redirect:/anutri";
+	 
+ }
+ 
  @GetMapping("/nutricad")
  public String nft() {
 	 return "cad_nutri";
@@ -46,14 +59,20 @@ Clientes clientes;
  }
  
  @GetMapping("/anutri")
- public String nutri() {
-	 return "lnutri";
+ public ModelAndView NutriListar(Cliente cliente) {
+	 ModelAndView modelAndView = new ModelAndView("lnutri");
+	 modelAndView.addObject("Clientes", clientes.findAll());
+	 return modelAndView;
  }
  
+ 
  @GetMapping("/apsi")
- public String psi() {
-	 return "lpsi";
+ public ModelAndView PsiListar(Cliente cliente) {
+	 ModelAndView modelAndView = new ModelAndView("lpsi");
+	 modelAndView.addObject("Clientes", clientes.findAll());
+	 return modelAndView;
  }
+
  
  @GetMapping("/editarCliente/{id}")
  public String editarAlunos(@PathVariable("id") Long id,  Model model) {
@@ -61,11 +80,39 @@ Clientes clientes;
   	return "editCliente";
  }
  
+ 
+ @GetMapping("/editarN/{id}")
+ public String editarAluno(@PathVariable("id") Long id,  Model model) {
+  	model.addAttribute("dados", clientes.findById(id));
+  	return "editNutri";
+ }
+ 
+ @GetMapping("/editarP/{id}")
+ public String editarAlun(@PathVariable("id") Long id,  Model model) {
+  	model.addAttribute("dados", clientes.findById(id));
+  	return "editP";
+ }
+ 
+ 
+ 
  @GetMapping("/delete/{id}")
  public String delete(@PathVariable("id") Long id) {
  	clientes.deleteById(id);
  	return "redirect:/aoft";
   }  	
+ 
+ @GetMapping("/deletar/{id}")
+ public String delet(@PathVariable("id") Long id) {
+ 	clientes.deleteById(id);
+ 	return "redirect:/anutri";
+  }  	
+ 
+ @GetMapping("/deletarP/{id}")
+ public String deletarp(@PathVariable("id") Long id) {
+ 	clientes.deleteById(id);
+ 	return "redirect:/apsi";
+  }  	
+ 
  
  @GetMapping("/EC")
  public String Editar(Cliente cliente) {
@@ -73,4 +120,17 @@ Clientes clientes;
 	 return "redirect:/aoft";
  }
  
+ @GetMapping("/ECN")
+ public String Edit(Cliente cliente) {
+	 clientes.save(cliente);
+	 return "redirect:/anutri";
+ }
+ 
+
+ @GetMapping("/ECP")
+ public String Editarp(Cliente cliente) {
+	 clientes.save(cliente);
+	 return "redirect:/apsi";
+ }
+  
 }
