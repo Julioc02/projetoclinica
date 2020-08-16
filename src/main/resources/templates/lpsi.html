@@ -105,14 +105,14 @@ table {
     <tr>
         <td>#</td>
         <td>NOME</td>
-        <td>VALOR</td>
         <td>DATA</td>
         <td>HORÁRIO</td>
+        <td>VALOR</td>
         <td>EDITAR</td>
         <td>EXCLUIR</td>
     </tr>
     <tr th:each="c : ${Clientes}">
-          <td th:text="${c.id}"></td>
+    <td th:text="${c.id}"></td>
 		  <td th:text="${c.cliente}"></td>
 		  <td th:text="${c.data}"></td>
 		  <td th:text="${c.horario}"></td>
